@@ -7,7 +7,7 @@ pub fn parse_date_to_epoch(date: NaiveDate) -> i64 {
     .timestamp_millis();
 }
 
-pub fn parse_date<'a>(date: String) -> Result<NaiveDate, ParseError> {
+pub fn parse_date(date: String) -> Result<NaiveDate, ParseError> {
   NaiveDate::parse_from_str(&date[..], "%Y-%m-%d")
 }
 

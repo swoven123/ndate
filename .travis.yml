@@ -1,23 +1,17 @@
 language: rust
 rust:
 - stable
-- beta
-- nightly
-matrix:
-  allow_failures:
-  - rust: nightly
-  fast_finish: true
 os:
 - windows
-script: cargo build --verbose --release; cargo test --verbose
-deploy:
-  - provider: cargo
-    skip_cleanup: true
-    on:
-      tags: true
-      condition: "$TRAVIS_RUST_VERSION = stable"
-      branch: master
-    file_glob: true # <-- note this new field
-    file: target/release/ndate-*
-    token:
-      secure: qGGWqEyn60+PWH+oAwnHF1piwPEMw5zO/EsmNIEfzphzeskhdnCFNkYvhX7agzAYSX2eSByhmBgKf5pZkkfHga6t8aKQlB/XQqu1/EryNh/OwMFWsQidT4xEXm/L7dM/vy8iCh81yY6L/4CubDmpl6lqXGdi9EadBscBZVy4+lWU70zzK4jPb+YnFnQ8sg0/TqNg2v0RnO1s1J7jXh4vtfkpuzAACe2AmemewHBj8jWB1xDeYpjMq9i+qPG7PWoM7G1tBxnHU1pl2zCJ7tvX+wAFphdZuXWxFAHcvxrbRXWopBA6RgwezaAdcaxsQJb5hjiOlJWm33sHQZU1EdpZU+jtkW99hU0MZB5N5lrs1RrkGXY8dRBFlgz+41bN43e0e/6fuPq3iomemb3spDUz7eSQSgXvedmAIB3sXGB+abpciQanzWsF6B6c2PkVRXqfcS8xJugqKsSFtioohQZ4dlh78vR5qSatPIBzAa+gFZOKkwmlLB0C2Jye2r/qzvETdwVgY+3U/ZMDW0hoG29DTXWMiwndeb82rA1y76oRdA9d8/EHRasOhyqZus89oQjf7BRxWrcHjazp4W+dXjDCEXxmZn/y5guX0y6Ju2ORgA/fnSmBPpAJ+yuA+6xqF9k9yIkkyTVseki4cTHS8NSPMxm0L1gLArjuKrZQL+35JA0=
+jobs:
+  include:
+    - script: cargo test --verbose
+    - script: cargo build --verbose --release
+    - stage: GitHub Release
+      script: echo "Deploying to GitHub releases ..."
+      deploy:
+        provider: releases
+        api_key: qGGWqEyn60+PWH+oAwnHF1piwPEMw5zO/EsmNIEfzphzeskhdnCFNkYvhX7agzAYSX2eSByhmBgKf5pZkkfHga6t8aKQlB/XQqu1/EryNh/OwMFWsQidT4xEXm/L7dM/vy8iCh81yY6L/4CubDmpl6lqXGdi9EadBscBZVy4+lWU70zzK4jPb+YnFnQ8sg0/TqNg2v0RnO1s1J7jXh4vtfkpuzAACe2AmemewHBj8jWB1xDeYpjMq9i+qPG7PWoM7G1tBxnHU1pl2zCJ7tvX+wAFphdZuXWxFAHcvxrbRXWopBA6RgwezaAdcaxsQJb5hjiOlJWm33sHQZU1EdpZU+jtkW99hU0MZB5N5lrs1RrkGXY8dRBFlgz+41bN43e0e/6fuPq3iomemb3spDUz7eSQSgXvedmAIB3sXGB+abpciQanzWsF6B6c2PkVRXqfcS8xJugqKsSFtioohQZ4dlh78vR5qSatPIBzAa+gFZOKkwmlLB0C2Jye2r/qzvETdwVgY+3U/ZMDW0hoG29DTXWMiwndeb82rA1y76oRdA9d8/EHRasOhyqZus89oQjf7BRxWrcHjazp4W+dXjDCEXxmZn/y5guX0y6Ju2ORgA/fnSmBPpAJ+yuA+6xqF9k9yIkkyTVseki4cTHS8NSPMxm0L1gLArjuKrZQL+35JA0=
+        skip_cleanup: true
+        on:
+          tags: true

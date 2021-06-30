@@ -9,10 +9,6 @@ jobs:
   - script: cargo build --verbose --release
   - stage: GitHub Release
     script: echo "Deploying to GitHub releases ..."
-    before_deploy:
-      - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install zip ; fi
-      - strip "target/$TARGET/release/${PROJECT_NAME}${SUFFIX}"
-      - zip ${PROJECT_NAME}-${TRAVIS_TAG}-${TARGET}.zip -j "target/$TARGET/release/${PROJECT_NAME}${SUFFIX}"
     deploy:
       provider: releases
       api_key:

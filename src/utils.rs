@@ -1,12 +1,5 @@
 use chrono::{Datelike, NaiveDate, ParseError, TimeZone, Utc};
 
-///Parses the NaiveDate input to epoch date in millis
-/// #Examples
-/// ```
-/// let epoch_timestamp = parse_date_to_epoch(NaiveDate::from_ymd(1982, 9, 9));
-/// let expected_value = 400420800000;
-/// assert_eq!(expected_value, epoch_timestamp);
-/// ```
 pub fn parse_date_to_epoch(date: NaiveDate) -> i64 {
   return Utc
     .ymd(date.year(), date.month(), date.day())

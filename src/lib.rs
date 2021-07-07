@@ -14,9 +14,12 @@ use constants::{
 ///
 /// # Examples
 /// ```
+///
+/// use ndate::Config;
+///
 /// let args = vec![String::from("ndate"),String::from("-b"),String::from("1985-09-09")];
 /// let working_config = Config::new(&args).unwrap();
-/// execute(working_config).unwrap_or_else(|_err| assert!(false));
+/// ndate::execute(working_config).unwrap_or_else(|_err| assert!(false));
 ///
 /// ```
 pub fn execute<'a>(config: Config) -> Result<(), &'a str> {
@@ -98,10 +101,8 @@ fn calculate_days_in_month(year: i32, month: u32) -> u32 {
 ///
 /// # Examples
 /// ```
-/// Config {
-/// bs:true,
-/// date:'2042-05-25'
-/// }
+/// let args = vec![String::from("ndate"),String::from("-b"),String::from("1985-09-09")];
+//let test_config = Config::new(&args).unwrap();
 /// ```
 pub struct Config {
   bs: bool,

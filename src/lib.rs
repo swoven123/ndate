@@ -9,6 +9,16 @@ use constants::{
   MONTH_LENGTHS_ENCODED, MS_PER_DAY,
 };
 
+/// Takes in the input as Config struct and displays converted date
+/// if the operations are successful, else returns error.
+///
+/// # Examples
+/// ```
+/// let args = vec![String::from("ndate"),String::from("-b"),String::from("1985-09-09")];
+/// let working_config = Config::new(&args).unwrap();
+/// execute(working_config).unwrap_or_else(|_err| assert!(false));
+///
+/// ```
 pub fn execute<'a>(config: Config) -> Result<(), &'a str> {
   let result = if config.bs {
     ad_to_bs(config.date)
@@ -84,6 +94,15 @@ fn calculate_days_in_month(year: i32, month: u32) -> u32 {
     .unwrap()
 }
 
+/// Config struct is used to wrap the arguments passed from user to one common place
+///
+/// # Examples
+/// ```
+/// Config {
+/// bs:true,
+/// date:'2042-05-25'
+/// }
+/// ```
 pub struct Config {
   bs: bool,
   date: NaiveDate,

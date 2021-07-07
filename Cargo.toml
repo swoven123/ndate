@@ -3,6 +3,9 @@ name = "ndate"
 version = "0.1.0"
 authors = ["swoven pokharel <swovenpokharel@gmail.com>"]
 edition = "2018"
+description = "This is a program that gives the current Nepali date (Bikram Sambhat date), converts Bikram Sambhat to AD date and vice versa."
+license = "MIT OR Apache-2.0"
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

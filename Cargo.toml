@@ -11,4 +11,3 @@ license = "MIT OR Apache-2.0"
 
 [dependencies]
 chrono = "0.4.19"
-regex = "1.5.4"
